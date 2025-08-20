@@ -3,6 +3,7 @@ using designPattern.Builder;
 using designPattern.Factory;
 using designPatterns;
 using designPatterns.problem;
+using designPattern.AbstractFactory;
 
 Console.WriteLine("Hello, World!");
 
@@ -45,11 +46,20 @@ Console.WriteLine("Hello, World!");
 
 //Builder
 
-User userObj = new User.UserBuilder("John", "Doe")
-.WithEmail("johndoe@gmail.com")
-.WithPhone("9199199991").Build();
+// User userObj = new User.UserBuilder("John", "Doe")
+// .WithEmail("johndoe@gmail.com")
+// .WithPhone("9199199991").Build();
 
-Console.WriteLine(userObj.FirstName);
-Console.WriteLine(userObj.LastName);
-Console.WriteLine(userObj.Email);
-Console.WriteLine(userObj.Phone);
+// Console.WriteLine(userObj.FirstName);
+// Console.WriteLine(userObj.LastName);
+// Console.WriteLine(userObj.Email);
+// Console.WriteLine(userObj.Phone);
+
+//Abstract Factory
+
+IGUIFactory windowsFactory= new WindowsFactory();
+IButton  windowsButton = windowsFactory.CreateButton();
+ICheckBox windowsCheckBox= windowsFactory.CreateCheckBox();
+
+windowsButton.Render();
+windowsCheckBox.Render();
