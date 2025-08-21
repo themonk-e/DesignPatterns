@@ -4,6 +4,7 @@ using designPattern.Factory;
 using designPatterns;
 using designPatterns.problem;
 using designPattern.AbstractFactory;
+using designPattern.Prototype;
 
 Console.WriteLine("Hello, World!");
 
@@ -57,9 +58,32 @@ Console.WriteLine("Hello, World!");
 
 //Abstract Factory
 
-IGUIFactory windowsFactory= new WindowsFactory();
-IButton  windowsButton = windowsFactory.CreateButton();
-ICheckBox windowsCheckBox= windowsFactory.CreateCheckBox();
+// IGUIFactory windowsFactory= new WindowsFactory();
+// IButton  windowsButton = windowsFactory.CreateButton();
+// ICheckBox windowsCheckBox= windowsFactory.CreateCheckBox();
 
-windowsButton.Render();
-windowsCheckBox.Render();
+// windowsButton.Render();
+// windowsCheckBox.Render();
+
+
+//Prototype
+IDocument legalDocument = DocTemplateRegistry.GetDocumentTemplate("LegalDocument");
+legalDocument.printDocument();
+Console.WriteLine();
+
+IDocument invoice = DocTemplateRegistry.GetDocumentTemplate("Invoice");
+invoice.printDocument();
+Console.WriteLine();
+
+IDocument CivillegalDocument = DocTemplateRegistry.GetDocumentTemplate("LegalDocument");
+CivillegalDocument.createDocument(Title: "Land Problem Notice",
+ Content: "This notice is to condemn about the encroachment of footpath",
+ Author: "Suresh LLB",
+ DocFormatting: new Formatting() { Color = "Black", Font = "Segou", FontSize = 2 }
+ );
+
+CivillegalDocument.printDocument();
+Console.WriteLine();
+legalDocument.printDocument();
+
+
