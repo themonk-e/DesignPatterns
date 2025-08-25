@@ -5,6 +5,7 @@ using designPatterns;
 using designPatterns.problem;
 using designPattern.AbstractFactory;
 using designPattern.Prototype;
+using designPattern.Structural.Adapter;
 
 Console.WriteLine("Hello, World!");
 
@@ -67,23 +68,33 @@ Console.WriteLine("Hello, World!");
 
 
 //Prototype
-IDocument legalDocument = DocTemplateRegistry.GetDocumentTemplate("LegalDocument");
-legalDocument.printDocument();
-Console.WriteLine();
+// IDocument legalDocument = DocTemplateRegistry.GetDocumentTemplate("LegalDocument");
+// legalDocument.printDocument();
+// Console.WriteLine();
 
-IDocument invoice = DocTemplateRegistry.GetDocumentTemplate("Invoice");
-invoice.printDocument();
-Console.WriteLine();
+// IDocument invoice = DocTemplateRegistry.GetDocumentTemplate("Invoice");
+// invoice.printDocument();
+// Console.WriteLine();
 
-IDocument CivillegalDocument = DocTemplateRegistry.GetDocumentTemplate("LegalDocument");
-CivillegalDocument.createDocument(Title: "Land Problem Notice",
- Content: "This notice is to condemn about the encroachment of footpath",
- Author: "Suresh LLB",
- DocFormatting: new Formatting() { Color = "Black", Font = "Segou", FontSize = 2 }
- );
+// IDocument CivillegalDocument = DocTemplateRegistry.GetDocumentTemplate("LegalDocument");
+// CivillegalDocument.createDocument(Title: "Land Problem Notice",
+//  Content: "This notice is to condemn about the encroachment of footpath",
+//  Author: "Suresh LLB",
+//  DocFormatting: new Formatting() { Color = "Black", Font = "Segou", FontSize = 2 }
+//  );
 
-CivillegalDocument.printDocument();
-Console.WriteLine();
-legalDocument.printDocument();
+// CivillegalDocument.printDocument();
+// Console.WriteLine();
+// legalDocument.printDocument();
+
+
+//Structural
+
+//Adapter
+DocumentViwerApp documentViwerOld = new DocumentViwerApp(new PDFViewer());
+documentViwerOld.DisplayDoc("desginPatterns.pdf");
+
+DocumentViwerApp documentViwerNew = new DocumentViwerApp(new WordReaderAdapter());
+documentViwerNew.DisplayDoc("designPatterns.docx");
 
 
