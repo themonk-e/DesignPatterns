@@ -7,6 +7,7 @@ using designPattern.AbstractFactory;
 using designPattern.Prototype;
 using designPattern.Structural.Adapter;
 using designPattern.Structural.Bridge;
+using designPattern.Structural.Decorator;
 
 Console.WriteLine("Hello, World!");
 
@@ -101,22 +102,33 @@ Console.WriteLine("Hello, World!");
 
 
 //Bridge
-Notification alertNotificationEmail = new AlertNotification(new EmailChannel());
-alertNotificationEmail.SendMessage("Plan Expired");
+// Notification alertNotificationEmail = new AlertNotification(new EmailChannel());
+// alertNotificationEmail.SendMessage("Plan Expired");
 
-Notification alertNotificationSMS = new AlertNotification(new SMSChannel());
-alertNotificationSMS.SendMessage("Plan Expired");
+// Notification alertNotificationSMS = new AlertNotification(new SMSChannel());
+// alertNotificationSMS.SendMessage("Plan Expired");
 
-Notification ReminderNotificationEmail = new ReminderNotification(new EmailChannel());
-ReminderNotificationEmail.SendMessage("Plan will expire in 2 days");
+// Notification ReminderNotificationEmail = new ReminderNotification(new EmailChannel());
+// ReminderNotificationEmail.SendMessage("Plan will expire in 2 days");
 
-Notification ReminderNotificationSMS = new ReminderNotification(new SMSChannel());
-ReminderNotificationSMS.SendMessage("Plan will expire in 2 days");
+// Notification ReminderNotificationSMS = new ReminderNotification(new SMSChannel());
+// ReminderNotificationSMS.SendMessage("Plan will expire in 2 days");
 
-//New requirement to send whatsapp notification
+// //New requirement to send whatsapp notification
 
-Notification alertNotificationWhatsapp = new AlertNotification(new WhatsappChannel());
-alertNotificationWhatsapp.SendMessage("Plan Expired");
+// Notification alertNotificationWhatsapp = new AlertNotification(new WhatsappChannel());
+// alertNotificationWhatsapp.SendMessage("Plan Expired");
 
-Notification ReminderNotificationWhatsapp = new ReminderNotification(new WhatsappChannel());
-ReminderNotificationWhatsapp.SendMessage("Plan will expire in 2 days");
+// Notification ReminderNotificationWhatsapp = new ReminderNotification(new WhatsappChannel());
+// ReminderNotificationWhatsapp.SendMessage("Plan will expire in 2 days");
+
+//Decorator
+IStorage storage = new Storage("data.txt");
+storage = new CompressionStorageDecorator(storage);
+storage = new EncryptionStorageDecorator(storage);
+
+storage.Store("Design Patterns are powerful!");
+
+storage.Retrieve();
+
+
