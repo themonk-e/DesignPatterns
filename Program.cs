@@ -8,6 +8,7 @@ using designPattern.Prototype;
 using designPattern.Structural.Adapter;
 using designPattern.Structural.Bridge;
 using designPattern.Structural.Decorator;
+using designPattern.Structural.Facade;
 
 Console.WriteLine("Hello, World!");
 
@@ -123,12 +124,20 @@ Console.WriteLine("Hello, World!");
 // ReminderNotificationWhatsapp.SendMessage("Plan will expire in 2 days");
 
 //Decorator
-IStorage storage = new Storage("data.txt");
-storage = new CompressionStorageDecorator(storage);
-storage = new EncryptionStorageDecorator(storage);
+// IStorage storage = new Storage("data.txt");
+// storage = new CompressionStorageDecorator(storage);
+// storage = new EncryptionStorageDecorator(storage);
 
-storage.Store("Design Patterns are powerful!");
+// storage.Store("Design Patterns are powerful!");
 
-storage.Retrieve();
+// storage.Retrieve();
 
 
+//Facade
+
+VideoStreamingFacade videoStreamingFacade = new VideoStreamingFacade(new LoselessVideoCompressor(),
+new AudioProcessor320KBPS(),
+new MP4320KBPSVideoStreamer(),
+new MP4VideoReader());
+
+videoStreamingFacade.StreamVideo("designPatternsMastery.MV");
