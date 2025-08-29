@@ -9,6 +9,7 @@ using designPattern.Structural.Adapter;
 using designPattern.Structural.Bridge;
 using designPattern.Structural.Decorator;
 using designPattern.Structural.Facade;
+using designPattern.Structural.Composite;
 
 Console.WriteLine("Hello, World!");
 
@@ -135,9 +136,29 @@ Console.WriteLine("Hello, World!");
 
 //Facade
 
-VideoStreamingFacade videoStreamingFacade = new VideoStreamingFacade(new LoselessVideoCompressor(),
-new AudioProcessor320KBPS(),
-new MP4320KBPSVideoStreamer(),
-new MP4VideoReader());
+// VideoStreamingFacade videoStreamingFacade = new VideoStreamingFacade(new LoselessVideoCompressor(),
+// new AudioProcessor320KBPS(),
+// new MP4320KBPSVideoStreamer(),
+// new MP4VideoReader());
 
-videoStreamingFacade.StreamVideo("designPatternsMastery.MV");
+// videoStreamingFacade.StreamVideo("designPatternsMastery.MV");
+
+//Composite
+
+// Create files
+FileItem report = new FileItem("Report.docx");
+FileItem data = new FileItem("Data.csv");
+
+// Create folder and add files
+Folder projectFolder = new Folder("Project");
+projectFolder.Add(report);
+projectFolder.Add(data);
+
+Folder root = new Folder("Root");
+root.Add(projectFolder);
+root.Add(new FileItem("Readme.txt"));
+
+// Apply permissions
+root.AddPermission("Read");
+projectFolder.AddPermission("Write");
+root.DisplayProperties();
