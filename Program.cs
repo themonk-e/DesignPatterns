@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using designPattern.Builder;
+//using designPattern.Builder;
 using designPattern.Factory;
 using designPatterns;
 using designPatterns.problem;
@@ -10,6 +10,7 @@ using designPattern.Structural.Bridge;
 using designPattern.Structural.Decorator;
 using designPattern.Structural.Facade;
 using designPattern.Structural.Composite;
+using designPattern.Structural.Proxy;
 
 Console.WriteLine("Hello, World!");
 
@@ -145,20 +146,32 @@ Console.WriteLine("Hello, World!");
 
 //Composite
 
-// Create files
-FileItem report = new FileItem("Report.docx");
-FileItem data = new FileItem("Data.csv");
+// // Create files
+// FileItem report = new FileItem("Report.docx");
+// FileItem data = new FileItem("Data.csv");
 
-// Create folder and add files
-Folder projectFolder = new Folder("Project");
-projectFolder.Add(report);
-projectFolder.Add(data);
+// // Create folder and add files
+// Folder projectFolder = new Folder("Project");
+// projectFolder.Add(report);
+// projectFolder.Add(data);
 
-Folder root = new Folder("Root");
-root.Add(projectFolder);
-root.Add(new FileItem("Readme.txt"));
+// Folder root = new Folder("Root");
+// root.Add(projectFolder);
+// root.Add(new FileItem("Readme.txt"));
 
-// Apply permissions
-root.AddPermission("Read");
-projectFolder.AddPermission("Write");
-root.DisplayProperties();
+// // Apply permissions
+// root.AddPermission("Read");
+// projectFolder.AddPermission("Write");
+// root.DisplayProperties();
+
+User admin = new User("Alice", "admin");
+User guest = new User("Bob", "guest");
+
+IDocumentReader report = new ProxyDocumentReader("Report.docx", "John", "Editor");
+
+// Guest tries to open
+report.Open(guest); 
+
+
+// Admin tries to open
+report.Open(admin);
