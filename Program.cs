@@ -11,6 +11,7 @@ using designPattern.Structural.Decorator;
 using designPattern.Structural.Facade;
 using designPattern.Structural.Composite;
 using designPattern.Structural.Proxy;
+using designPattern.Structural.Flyweight;
 
 Console.WriteLine("Hello, World!");
 
@@ -164,17 +165,37 @@ Console.WriteLine("Hello, World!");
 // projectFolder.AddPermission("Write");
 // root.DisplayProperties();
 
-User admin = new User("Alice", "admin");
-User guest = new User("Bob", "guest");
-User manager = new User("Mahe", "manager");
+// User admin = new User("Alice", "admin");
+// User guest = new User("Bob", "guest");
+// User manager = new User("Mahe", "manager");
 
-IDocumentReader report = new ProxyDocumentReader("Report.docx", "John", "Editor");
+// IDocumentReader report = new ProxyDocumentReader("Report.docx", "John", "Editor");
 
-// Guest tries to open
-report.Open(guest);
+// // Guest tries to open
+// report.Open(guest);
 
 
-// Admin tries to open
-report.Open(admin);
+// // Admin tries to open
+// report.Open(admin);
 
-report.Open(manager);
+// report.Open(manager);
+
+//Flyweight
+
+Player warriorPlayer1 = new Player("Mahesh",
+                                 FlyweightCharacterFactory.GetCharacter("Warrior3DMesh-SmoothTexture-SwirlAnimation"),
+                                 100,
+                                 100,
+                                 900
+                                 );
+
+
+Player warriorPlayer2 = new Player("Trevor",
+                                 FlyweightCharacterFactory.GetCharacter("Warrior3DMesh-SmoothTexture-SwirlAnimation"),
+                                 90,
+                                 20,
+                                 500
+                                 );
+
+warriorPlayer1.CreatePlayer();
+warriorPlayer2.CreatePlayer();
