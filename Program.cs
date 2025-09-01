@@ -166,12 +166,15 @@ Console.WriteLine("Hello, World!");
 
 User admin = new User("Alice", "admin");
 User guest = new User("Bob", "guest");
+User manager = new User("Mahe", "manager");
 
 IDocumentReader report = new ProxyDocumentReader("Report.docx", "John", "Editor");
 
 // Guest tries to open
-report.Open(guest); 
+report.Open(guest);
 
 
 // Admin tries to open
 report.Open(admin);
+
+report.Open(manager);
