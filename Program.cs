@@ -12,6 +12,7 @@ using designPattern.Structural.Facade;
 using designPattern.Structural.Composite;
 using designPattern.Structural.Proxy;
 using designPattern.Structural.Flyweight;
+using designPattern.Behavioural.Iterator;
 
 Console.WriteLine("Hello, World!");
 
@@ -182,20 +183,46 @@ Console.WriteLine("Hello, World!");
 
 //Flyweight
 
-Player warriorPlayer1 = new Player("Mahesh",
-                                 FlyweightCharacterFactory.GetCharacter("Warrior3DMesh-SmoothTexture-SwirlAnimation"),
-                                 100,
-                                 100,
-                                 900
-                                 );
+// Player warriorPlayer1 = new Player("Mahesh",
+//                                  FlyweightCharacterFactory.GetCharacter("Warrior3DMesh-SmoothTexture-SwirlAnimation"),
+//                                  100,
+//                                  100,
+//                                  900
+//                                  );
 
 
-Player warriorPlayer2 = new Player("Trevor",
-                                 FlyweightCharacterFactory.GetCharacter("Warrior3DMesh-SmoothTexture-SwirlAnimation"),
-                                 90,
-                                 20,
-                                 500
-                                 );
+// Player warriorPlayer2 = new Player("Trevor",
+//                                  FlyweightCharacterFactory.GetCharacter("Warrior3DMesh-SmoothTexture-SwirlAnimation"),
+//                                  90,
+//                                  20,
+//                                  500
+//                                  );
 
-warriorPlayer1.CreatePlayer();
-warriorPlayer2.CreatePlayer();
+// warriorPlayer1.CreatePlayer();
+// warriorPlayer2.CreatePlayer();
+
+//Behavioural
+//Iterator
+
+Playlist playlist = new Playlist();
+
+playlist.AddSong(new Song("Lose Yourself", "Eminem",320));
+playlist.AddSong(new Song("Blinding Lights", "The Weeknd", 200));
+playlist.AddSong(new Song("Shape of You", "Ed Sheeran", 250));
+
+IIterator normalIterator = playlist.CreateNormalIterator();
+Console.WriteLine("Normal Order:");
+while (normalIterator.HasNext())
+{
+    var song = normalIterator.Next();
+    Console.WriteLine($"{song.Title} - {song.Artist}");
+}
+
+
+IIterator shuffleIterator = playlist.CreateShuffleIterator();
+Console.WriteLine("\nShuffle Order:");
+while (shuffleIterator.HasNext())
+{
+    var song = shuffleIterator.Next();
+    Console.WriteLine($"{song.Title} - {song.Artist}");
+}
