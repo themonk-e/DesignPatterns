@@ -13,6 +13,7 @@ using designPattern.Structural.Composite;
 using designPattern.Structural.Proxy;
 using designPattern.Structural.Flyweight;
 using designPattern.Behavioural.Iterator;
+using designPattern.Behavioural.Observer;
 
 Console.WriteLine("Hello, World!");
 
@@ -204,25 +205,43 @@ Console.WriteLine("Hello, World!");
 //Behavioural
 //Iterator
 
-Playlist playlist = new Playlist();
+// Playlist playlist = new Playlist();
 
-playlist.AddSong(new Song("Lose Yourself", "Eminem",320));
-playlist.AddSong(new Song("Blinding Lights", "The Weeknd", 200));
-playlist.AddSong(new Song("Shape of You", "Ed Sheeran", 250));
+// playlist.AddSong(new Song("Lose Yourself", "Eminem",320));
+// playlist.AddSong(new Song("Blinding Lights", "The Weeknd", 200));
+// playlist.AddSong(new Song("Shape of You", "Ed Sheeran", 250));
 
-IIterator normalIterator = playlist.CreateNormalIterator();
-Console.WriteLine("Normal Order:");
-while (normalIterator.HasNext())
-{
-    var song = normalIterator.Next();
-    Console.WriteLine($"{song.Title} - {song.Artist}");
-}
+// IIterator normalIterator = playlist.CreateNormalIterator();
+// Console.WriteLine("Normal Order:");
+// while (normalIterator.HasNext())
+// {
+//     var song = normalIterator.Next();
+//     Console.WriteLine($"{song.Title} - {song.Artist}");
+// }
 
 
-IIterator shuffleIterator = playlist.CreateShuffleIterator();
-Console.WriteLine("\nShuffle Order:");
-while (shuffleIterator.HasNext())
-{
-    var song = shuffleIterator.Next();
-    Console.WriteLine($"{song.Title} - {song.Artist}");
-}
+// IIterator shuffleIterator = playlist.CreateShuffleIterator();
+// Console.WriteLine("\nShuffle Order:");
+// while (shuffleIterator.HasNext())
+// {
+//     var song = shuffleIterator.Next();
+//     Console.WriteLine($"{song.Title} - {song.Artist}");
+// }
+
+//observer
+
+IStock Tesla = new Stock("Tesla", 100);
+
+IInvestor Bob = new Investor("Bob");
+IInvestor Alice = new Investor("Alice");
+IInvestor Charlie = new Investor("Charlie");
+
+Bob.Buy(Tesla);
+Alice.Buy(Tesla);
+Charlie.Buy(Tesla);
+
+Tesla.ChangePrice(105);
+
+Bob.Sell(Tesla);
+
+Tesla.ChangePrice(110);
