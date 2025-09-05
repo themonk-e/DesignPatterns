@@ -14,6 +14,7 @@ using designPattern.Structural.Proxy;
 using designPattern.Structural.Flyweight;
 using designPattern.Behavioural.Iterator;
 using designPattern.Behavioural.Observer;
+using designPattern.Behavioural.Strategy;
 
 Console.WriteLine("Hello, World!");
 
@@ -230,18 +231,28 @@ Console.WriteLine("Hello, World!");
 
 //observer
 
-IStock Tesla = new Stock("Tesla", 100);
+// IStock Tesla = new Stock("Tesla", 100);
 
-IInvestor Bob = new Investor("Bob");
-IInvestor Alice = new Investor("Alice");
-IInvestor Charlie = new Investor("Charlie");
+// IInvestor Bob = new Investor("Bob");
+// IInvestor Alice = new Investor("Alice");
+// IInvestor Charlie = new Investor("Charlie");
 
-Bob.Buy(Tesla);
-Alice.Buy(Tesla);
-Charlie.Buy(Tesla);
+// Bob.Buy(Tesla);
+// Alice.Buy(Tesla);
+// Charlie.Buy(Tesla);
 
-Tesla.ChangePrice(105);
+// Tesla.ChangePrice(105);
 
-Bob.Sell(Tesla);
+// Bob.Sell(Tesla);
 
-Tesla.ChangePrice(110);
+// Tesla.ChangePrice(110);
+
+//Strategy
+
+Editor editor = new Editor();
+editor.SetLanguage("English");
+editor.CheckSpelling("Hello");
+
+editor.SetLanguage("French");
+editor.CheckSpelling("Bonjour");
+
