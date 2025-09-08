@@ -1,0 +1,25 @@
+namespace designPattern.Behavioural.Command
+{
+    public class SendEmailCommand: ICommand
+    {
+        private string _mailID;
+        private string _message;
+        public SendEmailCommand(string mailID, string message)
+        {
+            _mailID = mailID;
+            _message = message;
+
+        }
+
+        public void Execute()
+        {
+            Console.WriteLine($"Sending email to {_mailID} ....");
+            Console.WriteLine("Email Sent.");
+        }
+        public void Undo()
+        {
+            Console.WriteLine("Undoing email...");
+        }
+
+    }
+}

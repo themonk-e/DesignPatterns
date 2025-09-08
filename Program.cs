@@ -15,6 +15,8 @@ using designPattern.Structural.Flyweight;
 using designPattern.Behavioural.Iterator;
 using designPattern.Behavioural.Observer;
 using designPattern.Behavioural.Strategy;
+using designPattern.Behavioural.Command;
+using TaskScheduler = designPattern.Behavioural.Command.TaskScheduler;
 
 Console.WriteLine("Hello, World!");
 
@@ -249,10 +251,34 @@ Console.WriteLine("Hello, World!");
 
 //Strategy
 
-Editor editor = new Editor();
-editor.SetLanguage("English");
-editor.CheckSpelling("Hello");
+// Editor editor = new Editor();
+// editor.SetLanguage("English");
+// editor.CheckSpelling("Hello");
 
-editor.SetLanguage("French");
-editor.CheckSpelling("Bonjour");
+// editor.SetLanguage("French");
+// editor.CheckSpelling("Bonjour");
 
+
+//command
+
+TaskScheduler scheduler = new TaskScheduler();
+
+// Create commands for HR tasks
+ICommand sendWelcomeEmail = new SendEmailCommand("newhire@example.com", "Welcome to the company!");
+ICommand updateEmployeeRecord = new UpdateRecordCommand("EmployeeID123", "Set status to Active");
+
+scheduler.AddTask(sendWelcomeEmail);
+scheduler.AddTask(updateEmployeeRecord);
+
+scheduler.RunAll();
+scheduler.UndoLast();
+
+//Macro
+Console.WriteLine();
+MacroTask onboardingMacro = new MacroTask();
+onboardingMacro.AddCommand(sendWelcomeEmail);
+onboardingMacro.AddCommand(updateEmployeeRecord);
+
+// Queue and run the macro
+scheduler.AddTask(onboardingMacro);
+scheduler.RunAll();
