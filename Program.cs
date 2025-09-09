@@ -17,6 +17,8 @@ using designPattern.Behavioural.Observer;
 using designPattern.Behavioural.Strategy;
 using designPattern.Behavioural.Command;
 using TaskScheduler = designPattern.Behavioural.Command.TaskScheduler;
+using designPattern.Behavioural.Template;
+
 
 Console.WriteLine("Hello, World!");
 
@@ -261,24 +263,33 @@ Console.WriteLine("Hello, World!");
 
 //command
 
-TaskScheduler scheduler = new TaskScheduler();
+// TaskScheduler scheduler = new TaskScheduler();
 
-// Create commands for HR tasks
-ICommand sendWelcomeEmail = new SendEmailCommand("newhire@example.com", "Welcome to the company!");
-ICommand updateEmployeeRecord = new UpdateRecordCommand("EmployeeID123", "Set status to Active");
+// // Create commands for HR tasks
+// ICommand sendWelcomeEmail = new SendEmailCommand("newhire@example.com", "Welcome to the company!");
+// ICommand updateEmployeeRecord = new UpdateRecordCommand("EmployeeID123", "Set status to Active");
 
-scheduler.AddTask(sendWelcomeEmail);
-scheduler.AddTask(updateEmployeeRecord);
+// scheduler.AddTask(sendWelcomeEmail);
+// scheduler.AddTask(updateEmployeeRecord);
 
-scheduler.RunAll();
-scheduler.UndoLast();
+// scheduler.RunAll();
+// scheduler.UndoLast();
 
-//Macro
-Console.WriteLine();
-MacroTask onboardingMacro = new MacroTask();
-onboardingMacro.AddCommand(sendWelcomeEmail);
-onboardingMacro.AddCommand(updateEmployeeRecord);
+// //Macro
+// Console.WriteLine();
+// MacroTask onboardingMacro = new MacroTask();
+// onboardingMacro.AddCommand(sendWelcomeEmail);
+// onboardingMacro.AddCommand(updateEmployeeRecord);
 
-// Queue and run the macro
-scheduler.AddTask(onboardingMacro);
-scheduler.RunAll();
+// // Queue and run the macro
+// scheduler.AddTask(onboardingMacro);
+// scheduler.RunAll();
+
+//Template
+
+
+PDFExporter pDFExporter = new PDFExporter();
+pDFExporter.Export("report.pdf", "C:\\Docs");
+
+ExcelExporter excelExporter = new ExcelExporter();
+excelExporter.Export("report.xlsx", "C:\\Docs");
