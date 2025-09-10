@@ -18,6 +18,7 @@ using designPattern.Behavioural.Strategy;
 using designPattern.Behavioural.Command;
 using TaskScheduler = designPattern.Behavioural.Command.TaskScheduler;
 using designPattern.Behavioural.Template;
+using designPattern.Behavioural.State;
 
 
 Console.WriteLine("Hello, World!");
@@ -288,8 +289,39 @@ Console.WriteLine("Hello, World!");
 //Template
 
 
-PDFExporter pDFExporter = new PDFExporter();
-pDFExporter.Export("report.pdf", "C:\\Docs");
+// PDFExporter pDFExporter = new PDFExporter();
+// pDFExporter.Export("report.pdf", "C:\\Docs");
 
-ExcelExporter excelExporter = new ExcelExporter();
-excelExporter.Export("report.xlsx", "C:\\Docs");
+// ExcelExporter excelExporter = new ExcelExporter();
+// excelExporter.Export("report.xlsx", "C:\\Docs");
+
+
+//State
+
+DocumentStateContext document = new DocumentStateContext();
+//draft
+document.Edit();
+document.Save();
+document.Next();
+Console.WriteLine();
+//inreview
+document.Edit();
+document.Prev();
+Console.WriteLine();
+//Draft
+document.Edit();
+document.Save();
+document.Next();
+Console.WriteLine();
+//Inreview
+document.Next();
+
+//Approved
+document.Edit();
+document.Prev();
+document.Next();
+
+//Publish
+document.Edit();
+document.Next();
+document.Prev();
