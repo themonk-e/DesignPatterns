@@ -18,6 +18,10 @@ using designPattern.Behavioural.Strategy;
 using designPattern.Behavioural.Command;
 using TaskScheduler = designPattern.Behavioural.Command.TaskScheduler;
 using designPattern.Behavioural.Template;
+using designPattern.Behavioural.State;
+using designPattern.Behavioural.ChainOfResp;
+using System.Runtime.InteropServices;
+
 
 
 Console.WriteLine("Hello, World!");
@@ -288,8 +292,55 @@ Console.WriteLine("Hello, World!");
 //Template
 
 
-PDFExporter pDFExporter = new PDFExporter();
-pDFExporter.Export("report.pdf", "C:\\Docs");
+// PDFExporter pDFExporter = new PDFExporter();
+// pDFExporter.Export("report.pdf", "C:\\Docs");
 
-ExcelExporter excelExporter = new ExcelExporter();
-excelExporter.Export("report.xlsx", "C:\\Docs");
+// ExcelExporter excelExporter = new ExcelExporter();
+// excelExporter.Export("report.xlsx", "C:\\Docs");
+
+
+//State
+
+// DocumentStateContext document = new DocumentStateContext();
+// //draft
+// document.Edit();
+// document.Save();
+// document.Next();
+// Console.WriteLine();
+// //inreview
+// document.Edit();
+// document.Prev();
+// Console.WriteLine();
+// //Draft
+// document.Edit();
+// document.Save();
+// document.Next();
+// Console.WriteLine();
+// //Inreview
+// document.Next();
+
+// //Approved
+// document.Edit();
+// document.Prev();
+// document.Next();
+
+// //Publish
+// document.Edit();
+// document.Next();
+// document.Prev();
+
+
+//Chain of Responsibility
+
+
+Handler teamlead = new TeamLead();
+Handler deptManager = new DeptManager();
+Handler director = new Director();
+
+teamlead.SetNextHandler(deptManager);
+deptManager.SetNextHandler(director);
+
+
+teamlead.HandlesRequest("Weekly Report", ResponsibilityEnum.TeamLead);
+teamlead.HandlesRequest("Q3 Budget", ResponsibilityEnum.Manager);
+teamlead.HandlesRequest("5-Year Plan", ResponsibilityEnum.Director);
