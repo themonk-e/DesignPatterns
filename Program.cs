@@ -21,6 +21,7 @@ using designPattern.Behavioural.Template;
 using designPattern.Behavioural.State;
 using designPattern.Behavioural.ChainOfResp;
 using System.Runtime.InteropServices;
+using designPattern.Behavioural.Visitor;
 
 
 
@@ -333,14 +334,33 @@ Console.WriteLine("Hello, World!");
 //Chain of Responsibility
 
 
-Handler teamlead = new TeamLead();
-Handler deptManager = new DeptManager();
-Handler director = new Director();
+// Handler teamlead = new TeamLead();
+// Handler deptManager = new DeptManager();
+// Handler director = new Director();
 
-teamlead.SetNextHandler(deptManager);
-deptManager.SetNextHandler(director);
+// teamlead.SetNextHandler(deptManager);
+// deptManager.SetNextHandler(director);
 
 
-teamlead.HandlesRequest("Weekly Report", ResponsibilityEnum.TeamLead);
-teamlead.HandlesRequest("Q3 Budget", ResponsibilityEnum.Manager);
-teamlead.HandlesRequest("5-Year Plan", ResponsibilityEnum.Director);
+// teamlead.HandlesRequest("Weekly Report", ResponsibilityEnum.TeamLead);
+// teamlead.HandlesRequest("Q3 Budget", ResponsibilityEnum.Manager);
+// teamlead.HandlesRequest("5-Year Plan", ResponsibilityEnum.Director);
+
+//Visitor
+List<IFile> files = new List<IFile>();
+TextFile doc1 = new TextFile(300, "ASCII");
+ImageFile img1 = new ImageFile("RGB", "300x400", 330);
+VideoFile vid1 = new VideoFile("30fps", "1980*1080", 3);
+
+files.Add(doc1);
+files.Add(img1);
+files.Add(vid1);
+
+PrintFileDetails printFileDetails = new PrintFileDetails();
+CalculateSizeOnDisk calculateSizeOnDisk = new CalculateSizeOnDisk();
+
+foreach (var file in files)
+{
+    file.Accept(printFileDetails);
+    file.Accept(calculateSizeOnDisk);
+}
