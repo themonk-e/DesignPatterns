@@ -23,6 +23,7 @@ using designPattern.Behavioural.ChainOfResp;
 using System.Runtime.InteropServices;
 using designPattern.Behavioural.Visitor;
 using designPattern.Behavioural.Mediator;
+using designPattern.Behavioural.Memento;
 
 
 
@@ -368,15 +369,42 @@ Console.WriteLine("Hello, World!");
 
 
 //Mediator
-ChatUser mahesh = new ChatUser("Mahesh");
-ChatUser martha = new ChatUser("Martha");
-ChatUser jonas = new ChatUser("Jonas");
+// ChatUser mahesh = new ChatUser("Mahesh");
+// ChatUser martha = new ChatUser("Martha");
+// ChatUser jonas = new ChatUser("Jonas");
 
-ChatRoom schoolGroup = new ChatRoom();
+// ChatRoom schoolGroup = new ChatRoom();
 
-mahesh.JoinChatRoom(schoolGroup);
-martha.JoinChatRoom(schoolGroup);
-jonas.JoinChatRoom(schoolGroup);
+// mahesh.JoinChatRoom(schoolGroup);
+// martha.JoinChatRoom(schoolGroup);
+// jonas.JoinChatRoom(schoolGroup);
 
 
-mahesh.SendMessage("Hi all!", schoolGroup);
+// mahesh.SendMessage("Hi all!", schoolGroup);
+
+//Memento
+
+DocumentEditor documentEditor = new DocumentEditor();
+DocumentHistoryTracker history = new DocumentHistoryTracker(documentEditor);
+
+documentEditor.SetContent("Design Pattern Mastery");
+documentEditor.SetFont("Monteserrat");
+documentEditor.SetFontColor("Red");
+documentEditor.SetFontSize(10);
+documentEditor.SetBold(true);
+history.Save();
+
+documentEditor.Print();
+Console.WriteLine();
+
+documentEditor.SetContent("Design Mastery");
+
+
+documentEditor.Print();
+Console.WriteLine();
+
+history.Undo();
+
+documentEditor.Print();
+Console.WriteLine();
+
