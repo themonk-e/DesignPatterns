@@ -22,6 +22,7 @@ using designPattern.Behavioural.State;
 using designPattern.Behavioural.ChainOfResp;
 using System.Runtime.InteropServices;
 using designPattern.Behavioural.Visitor;
+using designPattern.Behavioural.Mediator;
 
 
 
@@ -347,20 +348,35 @@ Console.WriteLine("Hello, World!");
 // teamlead.HandlesRequest("5-Year Plan", ResponsibilityEnum.Director);
 
 //Visitor
-List<IFile> files = new List<IFile>();
-TextFile doc1 = new TextFile(300, "ASCII");
-ImageFile img1 = new ImageFile("RGB", "300x400", 330);
-VideoFile vid1 = new VideoFile("30fps", "1980*1080", 3);
+// List<IFile> files = new List<IFile>();
+// TextFile doc1 = new TextFile(300, "ASCII");
+// ImageFile img1 = new ImageFile("RGB", "300x400", 330);
+// VideoFile vid1 = new VideoFile("30fps", "1980*1080", 3);
 
-files.Add(doc1);
-files.Add(img1);
-files.Add(vid1);
+// files.Add(doc1);
+// files.Add(img1);
+// files.Add(vid1);
 
-PrintFileDetails printFileDetails = new PrintFileDetails();
-CalculateSizeOnDisk calculateSizeOnDisk = new CalculateSizeOnDisk();
+// PrintFileDetails printFileDetails = new PrintFileDetails();
+// CalculateSizeOnDisk calculateSizeOnDisk = new CalculateSizeOnDisk();
 
-foreach (var file in files)
-{
-    file.Accept(printFileDetails);
-    file.Accept(calculateSizeOnDisk);
-}
+// foreach (var file in files)
+// {
+//     file.Accept(printFileDetails);
+//     file.Accept(calculateSizeOnDisk);
+// }
+
+
+//Mediator
+ChatUser mahesh = new ChatUser("Mahesh");
+ChatUser martha = new ChatUser("Martha");
+ChatUser jonas = new ChatUser("Jonas");
+
+ChatRoom schoolGroup = new ChatRoom();
+
+mahesh.JoinChatRoom(schoolGroup);
+martha.JoinChatRoom(schoolGroup);
+jonas.JoinChatRoom(schoolGroup);
+
+
+mahesh.SendMessage("Hi all!", schoolGroup);
